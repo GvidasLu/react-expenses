@@ -1,16 +1,18 @@
 import firebase from 'firebase/app';
-import 'firebase/firestore'
+import 'firebase/firestore';
 
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAqTRXkXHsw47ItU2OQlbfhY1RXv945few",
-    authDomain: "expenses-5c73f.firebaseapp.com",
-    projectId: "expenses-5c73f",
-    storageBucket: "expenses-5c73f.appspot.com",
-    messagingSenderId: "66979273422",
-    appId: "1:66979273422:web:85c2ca343c6a7d0d1a0e9f"
+  apiKey: "AIzaSyC6g_ThnyblSD_NKYNBAIN_pJ0_AIULRr4",
+  authDomain: "expenses-efc4c.firebaseapp.com",
+  projectId: "expenses-efc4c",
+  storageBucket: "expenses-efc4c.appspot.com",
+  messagingSenderId: "1047785932223",
+  appId: "1:1047785932223:web:ff4a57f2fd1d63658d0d0a"
 };
 
 // Initialize Firebase
 export const app = firebase.initializeApp(firebaseConfig);
 
-export default firebase
+export default firebase;
