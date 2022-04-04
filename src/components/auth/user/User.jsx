@@ -7,22 +7,26 @@ import { auth, logout } from "../../../services/authService";
 import * as userServices from "../../../services/userServices";
 
 const User = () => {
+
   const [user, loading, error] = useAuthState(auth);
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/");
-    userServices.getUserData(user, setUserData);
-  }, [userData]);
+    if (!user) {
+      navigate('/')
+    }else{
+    userServices.getUserData(user, setUserData)
+    }
+  }, [user, loading])
 
   console.log(userData);
   return (
     <>
       {user ? ( //Ar turim prisijungusi vartotoja ?
         <Navbar.Collapse className="justify-content-end">
-          <NavDropdown title="Vardenis Pavardenis" id="basic-nav-dropdown">
-            <NavDropdown.Item>Vardenis@example.com</NavDropdown.Item>
+          <NavDropdown title={userData.name} id="basic-nav-dropdown">
+            <NavDropdown.Item>{userData.email}</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={logout}>Atsijungti</NavDropdown.Item>
           </NavDropdown>
