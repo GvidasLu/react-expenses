@@ -11,12 +11,14 @@ const Login = () => {
     password: "",
   });
   const [user, loading, error] = useAuthState(auth);
+  
   useEffect(() => {
-    if (loading) {
-      return;
-    }
-    if (user) navigate("/expenses");
+    if (loading) return
+    if (user) navigate("/expenses")
+    
+    
   }, [user, loading]);
+
   const handleChange = (event) => {
     setCredentials({
       ...credentials,
@@ -53,6 +55,12 @@ const Login = () => {
           />
         </Form.Group>
         <Button type="submit">Prisijungti</Button>
+        <div>
+          <ul>
+            <li>Neturi paskyros? <Link to="/register">Registruokites</Link></li>
+            <li>Pamirsote slaptazodi?<Link to="/reset">Atstatykite</Link></li>
+          </ul>
+        </div>
       </Form>
     </>
   );

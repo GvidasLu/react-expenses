@@ -9,7 +9,7 @@ const register = async (name, email, password) => {
     const res = await auth.createUserWithEmailAndPassword(email, password); //Sukuriamas vartotojas google cloude
     const user = res.user; //Pasiima sukurto vartotojo duomenis
     await db.collection("users").add({
-      vid: user.uid,
+      uid: user.uid,
       name,
       authProvider: "local",
       email,
@@ -31,5 +31,14 @@ const logout = () => {
   auth.signOut();
 };
 
+const resetPassword = async (email) => {
+  try {
+    await auth.sendPasswordResetEmail(email);
+    alert("Slaptazodzio priminimas issiustas");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export default firebase;
-export { auth, db, register, login, logout };
+export { auth, db, register, login, logout, resetPassword };

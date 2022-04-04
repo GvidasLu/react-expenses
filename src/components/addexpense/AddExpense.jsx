@@ -4,7 +4,11 @@ import expenseValidation from "../../utilities/expenseValidation";
 import Error from "../error/Error";
 import {useParams, useNavigate} from "react-router-dom";
 import * as services from '../../services/expensesServices'
+import {auth} from "../../services/authService";
+import {useAuthState} from "react-firebase-hooks/auth";
+
 const AddExpense = (props)=>{
+    const [user, loading, error] = useAuthState(auth)
     const [items, setItems] = useState({
         date:'',
         type:'',
@@ -19,6 +23,14 @@ const AddExpense = (props)=>{
     useEffect(()=>{
         id && services.getExpenseById(item=>setItems(item),id)
     },[id])
+
+    useEffect(() => {
+        if(loading) return
+        setItems({
+            ...items,
+            'uid':user.uid
+        })
+    }, [user])
 
     const handleChange = (e)=>{
 
@@ -43,7 +55,7 @@ const AddExpense = (props)=>{
         services.updateExpense(id,items)
         navigate("/");
     }
-
+    console.log(items)
     return(
         <>
             <Card>
