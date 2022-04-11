@@ -5,12 +5,14 @@ import AddExpense from "../addexpense/AddExpense";
 import * as service from "../../services/expensesServices";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/authServices";
-
+import { useGlobalContext } from "../../context/ExpensesContext";
 
 const Expenses = () => {
+
+  const {expenses, allExpenses} = useGlobalContext()
   const [user, error, loading] = useAuthState(auth)
   const [addExpense, setAddExpense] = useState(false)
-  const [expenses, setExpenses] = useState([]);
+  const [addExpenses, setExpenses] = useState([]);
 
   const saveExpenseHandler = (data) => {
     service.addExpense(data);

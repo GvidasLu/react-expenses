@@ -4,10 +4,13 @@ import './index.css';
 import App from './components/app/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as firebase from "firebase";
+import {AppProvider} from "./context/ExpensesContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppProvider>
+      <App />
+    </AppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
